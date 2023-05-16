@@ -1,6 +1,6 @@
 # zls-git
 
-This PKGBUILD allows you to easily install the latest development version of zls.
+This PKGBUILD allows you to easily install the latest development version of Zig Language Server (zls).
 
 ## About Zls
 
@@ -31,7 +31,7 @@ cd zls-git
 makepkg -si
 ```
 
-After installation, you can start using Zig by running the `zls` command in your
+After installation, you can start using Zig Language Server by running the `zls` command in your
 terminal.
 
 ## Update
