@@ -1,6 +1,6 @@
 _pkgbasename=zls
 pkgname=${_pkgbasename}-git
-pkgver=r1635.9164561
+pkgver=$(printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)")
 pkgrel=1
 pkgdesc="The @ziglang language server for all your Zig editor tooling needs, from autocomplete to goto-def!"
 arch=('x86_64' 'aarch64' 'i686')
@@ -14,21 +14,16 @@ sha256sums=('SKIP' 'SKIP')
 source=(git+https://github.com/zigtools/${_pkgbasename}
         git+https://github.com/ziglibs/known-folders)
 
-plain ''
-plain '▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░▒▒▓▓▓▓▓▓▓▒▒▒▒▒▒▓▓▒'
-plain '▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▓▓▓▓▓▓▓▓▓▓▓▓▒░░░░░░▒▓▓▓▓▓▓▓▓▓▓▓▓▒▓▓▓▓▓▒'
-plain '▓▓▓▓▓▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▓▓▓▓▓▓▓▓▓▓▓▓▒░░░░░░▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒'
-plain '▓▓▓▓▓▒▓▓▓▓▓▓▓▓▓▓▓▒▒▒░░▒▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒'
-plain '▒▓▓▒▒▓▓▓▓▓▓▓▓▓▓▓▒▒▓▓▒░▒▓▓▓▓▓▓▓▓▓▒▓▓▓▓▓▓▓░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░'
-plain '▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▒▒▓▓▓▒░▒▓▓▓▓▓▓▓▓▓▒▓▓▓▓▓▓▓▒▓▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▒'
-plain '▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▓▓▓▓▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓'
-plain '▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▓▓▓▓▓▓▒▓▓▓▓▓▓▓▓▓▓▓▒'
-plain ''
-
-pkgver() {
-	cd "${srcdir}/${_pkgbasename}"
-	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
-}
+echo -e '\e[93m'
+echo -e ' ▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓ ▒▒▒▒▒▒▒▒▒▒▒▒▒       ▒▒▓▓▓▓▓▓▓▒▒▒▒▒▒▓▓▒'
+echo -e '▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▓▓▓▓▓▓▓▓▓▓▓▓▒      ▒▓▓▓▓▓▓▓▓▓▓▓▓▒▓▓▓▓▓▒'
+echo -e '▓▓▓▓▓▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▓▓▓▓▓▓▓▓▓▓▓▓▒      ▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒'
+echo -e '▓▓▓▓▓▒▓▓▓▓▓▓▓▓▓▓▓▒▒▒  ▒▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒ ▒▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒'
+echo -e '▒▓▓▒▒▓▓▓▓▓▓▓▓▓▓▓▒▒▓▓▒ ▒▓▓▓▓▓▓▓▓▓▒▓▓▓▓▓▓▓ ▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒'
+echo -e ' ▒▒▓▓▓▓▓▓▓▓▓▓▓▓▒▒▓▓▓▒ ▒▓▓▓▓▓▓▓▓▓▒▓▓▓▓▓▓▓▒▓▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▒'
+echo -e '▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▓▓▓▓▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓'
+echo -e '▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▓▓▓▓▓▓▒▓▓▓▓▓▓▓▓▓▓▓▒'
+echo -e '\e[90m'
 
 prepare() {
   cd "${srcdir}/${_pkgbasename}"
@@ -50,12 +45,12 @@ package() {
 }
 
 function exit_cleanup {
+  cd "${srcdir}"/..
 	# Sanitization
-	# rm -rf "${srcdir}/${_pkgbasename}"
-  rm -rf "${srcdir}/${_pkgbasename}"
-	rm -rf "${pkgdir}"
-  rm -rf "${srcdir}/known-folders"
-  rm -rf "${srcdir}"
+	rm -rf "${srcdir}"
+	rm -rf "$PWD/known-folders"
+  rm -rf "$PWD/pkg"
+  rm -rf "$PWD/zls"
 	msg2 'exit cleanup done'
 	remove_deps
 }
