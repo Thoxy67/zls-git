@@ -53,9 +53,11 @@ function exit_cleanup {
 	cd "${srcdir}"/..
 	# Sanitization
 	rm -rf "${srcdir}/${_pkgbasename}"
+	rm -rf "$PWD/src/known-folders"
 	rm -rf "$PWD/known-folders"
 	rm -rf "$PWD/pkg"
 	rm -rf "$PWD/zls"
+	rm -rf "$PWD/src"
 	msg2 'exit cleanup done'
 	remove_deps
 }
