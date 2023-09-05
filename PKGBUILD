@@ -1,7 +1,7 @@
 _pkgbasename=zls
 pkgname=${_pkgbasename}-git
-pkgver=$(printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)")
 pkgrel=1
+pkgver=r1933.f9a1f6f
 pkgdesc="The @ziglang language server for all your Zig editor tooling needs, from autocomplete to goto-def!"
 arch=('x86_64' 'aarch64' 'i686')
 url="https://github.com/zigtools/zls"
@@ -12,7 +12,7 @@ provides=('zls')
 conflicts=('zls')
 sha256sums=('SKIP' 'SKIP')
 source=(git+https://github.com/zigtools/${_pkgbasename}
-        git+https://github.com/ziglibs/known-folders)
+	git+https://github.com/ziglibs/known-folders)
 
 echo -e '\e[93m'
 echo -e ' ▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓ ▒▒▒▒▒▒▒▒▒▒▒▒▒       ▒▒▓▓▓▓▓▓▓▒▒▒▒▒▒▓▓▒'
@@ -26,10 +26,15 @@ echo -e '▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▓▓�
 echo -e '\e[90m'
 
 prepare() {
-  cd "${srcdir}/${_pkgbasename}"
-  git submodule init
-  git config submodule.known-folders.url "$srcdir"/known-folders
-  git submodule update
+	cd "${srcdir}/${_pkgbasename}"
+	git submodule init
+	git config submodule.known-folders.url "$srcdir"/known-folders
+	git submodule update
+}
+
+pkgver() {
+	cd "${srcdir}/${_pkgbasename}"
+	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
 build() {
@@ -45,12 +50,12 @@ package() {
 }
 
 function exit_cleanup {
-  cd "${srcdir}"/..
+	cd "${srcdir}"/..
 	# Sanitization
-	rm -rf "${srcdir}"
+	rm -rf "${srcdir}/${_pkgbasename}"
 	rm -rf "$PWD/known-folders"
-  rm -rf "$PWD/pkg"
-  rm -rf "$PWD/zls"
+	rm -rf "$PWD/pkg"
+	rm -rf "$PWD/zls"
 	msg2 'exit cleanup done'
 	remove_deps
 }
