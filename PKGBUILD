@@ -1,7 +1,7 @@
 _pkgbasename=zls
 pkgname=${_pkgbasename}-git
 pkgrel=1
-pkgver=r1933.f9a1f6f
+pkgver=r1962.09e0753
 pkgdesc="The @ziglang language server for all your Zig editor tooling needs, from autocomplete to goto-def!"
 arch=('x86_64' 'aarch64' 'i686')
 url="https://github.com/zigtools/zls"
@@ -39,6 +39,7 @@ pkgver() {
 
 build() {
 	cd "${srcdir}/${_pkgbasename}"
+	sed -i 's/1220bb12c9bfe291eed1afe6a2070c7c39918ab1979f24a281bba39dfb23f5bcd544/1220206c698a1890d742a8b98acb16db99275d16f2e7fe2046c3d8f2249ed267ca71/g' "${srcdir}/${_pkgbasename}/build.zig.zon"
 	zig build -Doptimize=ReleaseSafe
 }
 
@@ -50,14 +51,8 @@ package() {
 }
 
 function exit_cleanup {
-	cd "${srcdir}"/..
 	# Sanitization
 	rm -rf "${srcdir}/${_pkgbasename}"
-	rm -rf "$PWD/src/known-folders"
-	rm -rf "$PWD/known-folders"
-	rm -rf "$PWD/pkg"
-	rm -rf "$PWD/zls"
-	rm -rf "$PWD/src"
 	msg2 'exit cleanup done'
 	remove_deps
 }
